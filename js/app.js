@@ -10,6 +10,8 @@ const modal = document.getElementById("modal");
 // Alert messages
 const alerts = (errMsg) => {
   errorBody.classList.remove("d-none");
+  errorBody.classList.add("d-flex");
+  errorBody.classList.add("align-items-center");
   errorTxt.innerText = errMsg;
   phoneRow.innerHTML = "";
   notFoundTxt.classList.remove("d-none");
