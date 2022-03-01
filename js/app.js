@@ -11,6 +11,7 @@ const modal = document.getElementById("modal");
 const alerts = (errMsg) => {
   errorBody.classList.remove("d-none");
   errorTxt.innerText = errMsg;
+  phoneRow.innerHTML = "";
 };
 // Load phone data
 const loadData = () => {
@@ -20,11 +21,13 @@ const loadData = () => {
   } else if (!isNaN(searchValue)) {
     alerts("Please enter a phone name instead of number.");
   } else {
+    errorBody.classList.add("d-none");
     fetch(
       `https://openapi.programming-hero.com/api/phones?search=${searchValue}`
     )
       .then((res) => res.json())
       .then((data) => displayPhones(data.data));
+    phoneRow.innerHTML = "";
   }
 };
 
@@ -49,16 +52,17 @@ const displayPhones = (phones) => {
         class="card-img-top"
         alt="..."
       />
-      <div class="card-body container-fluied">
+      <div class="card-body">
         <h4><b>Phone Name:</b> ${phone.phone_name}</h4>
         <h5><b>Phone Brand:</b> ${phone.brand}</h5>
         <button
-          class="btn custom-btn text-white "
+          class="btn custom-btn text-white"
           onclick="loadDetails('${phone.slug}')"
           >See details</button>
       </div>
     </div>`;
       phoneRow.appendChild(col);
+      notFoundTxt.classList.add("d-none");
     });
   }
 };
@@ -75,7 +79,7 @@ const displayDetails = (detailsInfo) => {
   class="btn btn-danger text-white position-absolute top-0 mt-2 me-3 end-0 p-2"
   type="button" onclick="modalClose()"
 >
-  X
+  Close
 </button>
 <div class="mt-5 d-flex justify-content-center">
   <img
@@ -87,8 +91,10 @@ const displayDetails = (detailsInfo) => {
 <div class="card-body text-center">
   <h4><b>Phone name:</b> ${detailsInfo.name}</h4>
   <h5><b>Phone brand:</b> ${detailsInfo.brand}</h5>
+  <h5><b>Storage:</b> ${detailsInfo.mainFeatures.storage}</h5>
+  <h5><b>Display size:</b> ${detailsInfo.mainFeatures.displaySize}</h5>
   <h5><b>Releash date:</b> ${detailsInfo.releaseDate}</h5>
-  <h5><b>Sensors:</b>${detailsInfo.mainFeatures.sensors} </h5>
+  <h5><b>Sensors:</b> ${detailsInfo.mainFeatures.sensors} </h5>
 </div>`;
   modal.classList.remove("d-none");
   details.classList.remove("d-none");
