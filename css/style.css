@@ -12,3 +12,9 @@
 .heading-color {
   color: crimson;
 }
+.send-forward {
+  z-index: 100;
+}
+.card-hight {
+  height: fit-content;
+}
