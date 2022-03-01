@@ -1,3 +1,4 @@
+/* Button style */
 .custom-btn {
   background: linear-gradient(
     0deg,
@@ -7,6 +8,7 @@
   border-radius: 35px;
   border: none;
 }
+/* Heading color */
 .heading-color {
   color: crimson;
 }

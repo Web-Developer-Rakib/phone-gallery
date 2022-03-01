@@ -1,13 +1,21 @@
 // Element selection
 const searchInput = document.getElementById("search-input");
+const errorBody = document.getElementById("error-body");
+const errorTxt = document.getElementById("error-txt");
+const notFoundTxt = document.getElementById("not-found");
 
-// Load phone data function
+// Alert messages
+const alerts = (errMsg) => {
+  errorBody.classList.remove("d-none");
+  errorTxt.innerText = errMsg;
+};
+// Load phone data
 const loadData = () => {
   const searchValue = searchInput.value.toLowerCase();
   if (searchValue === "") {
-    console.log("Please enter a value");
+    alerts("Please enter a phone name.");
   } else if (!isNaN(searchValue)) {
-    console.log("Enter a string");
+    alerts("Please enter a phone name instead of number.");
   } else {
     fetch(
       `https://openapi.programming-hero.com/api/phones?search=${searchValue}`
@@ -20,10 +28,19 @@ const loadData = () => {
 // Display phones
 const displayPhones = (phones) => {
   if (phones.length === 0) {
-    console.log("No results found");
+    notFoundTxt.classList.remove("d-none");
   } else {
-    for (const phone of phones) {
-      console.log(phone);
-    }
+    phones.forEach((phone) => {
+      console.log(phone.length);
+    });
   }
+};
+
+// Load details data
+const loadDetails = (id) => {
+  console.log(id);
+};
+// Display phones details
+const displayDetails = () => {
+  console.log("Phone details");
 };

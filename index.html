@@ -13,9 +13,26 @@
     />
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/style.css" />
+    <!-- Font awesome kit -->
+    <script
+      src="https://kit.fontawesome.com/bc90344567.js"
+      crossorigin="anonymous"
+    ></script>
     <title>Phone gallery</title>
   </head>
   <body>
+    <!-- Alert message -->
+    <div
+      class="alert alert-danger d-flex align-items-center fixed-top d-none"
+      role="alert"
+      id="error-body"
+    >
+      <i class="fas fa-exclamation-triangle"></i>
+      <div class="ms-2" id="error-txt">
+        An example danger alert with an icon
+      </div>
+    </div>
+    <!-- Main container -->
     <main class="container">
       <h1 class="text-center mt-5">
         <!-- Header text -->
@@ -40,7 +57,9 @@
         </button>
       </div>
       <!-- Error message -->
-      <h3 class="text-center text-danger">No results found!</h3>
+      <h3 class="text-center text-danger d-none" id="not-found">
+        No results found!
+      </h3>
       <!-- Display details -->
       <div class="card d-none">
         <button
@@ -75,7 +94,12 @@
             <div class="card-body">
               <h4><b>Phone Name:</b> Iphone 12</h4>
               <h5><b>Phone Brand:</b> Iphone</h5>
-              <a href="#" class="btn custom-btn text-white mt-2">See details</a>
+              <a
+                href="#"
+                class="btn custom-btn text-white mt-2"
+                onclick="displayDetails()"
+                >See details</a
+              >
             </div>
           </div>
         </div>
