@@ -12,6 +12,7 @@ const alerts = (errMsg) => {
   errorBody.classList.remove("d-none");
   errorTxt.innerText = errMsg;
   phoneRow.innerHTML = "";
+  notFoundTxt.classList.remove("d-none");
 };
 // Load phone data
 const loadData = () => {
