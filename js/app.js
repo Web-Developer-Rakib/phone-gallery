@@ -9,7 +9,6 @@ const modal = document.getElementById("modal");
 const seeMoreDiv = document.getElementById("see-more-div");
 const seeMoreBtn = document.getElementById("see-more");
 const spinner = document.getElementById("spinner");
-
 // Alert messages
 const alerts = (errMsg) => {
   errorBody.classList.remove("d-none");
@@ -24,9 +23,9 @@ const alerts = (errMsg) => {
 const loadData = () => {
   const searchValue = searchInput.value.toLowerCase();
   if (searchValue === "") {
-    alerts("Please enter a phone name.");
+    alerts("Please enter a Device name.");
   } else if (!isNaN(searchValue)) {
-    alerts("Please enter a phone name instead of number.");
+    alerts("Please enter a Device name instead of number.");
   } else {
     errorBody.classList.add("d-none");
     fetch(
@@ -39,7 +38,6 @@ const loadData = () => {
     phoneRow.innerHTML = "";
   }
 };
-
 // Display phones
 const displayPhones = (phones) => {
   if (phones.length === 0) {
@@ -56,7 +54,6 @@ const displayPhones = (phones) => {
       col.classList.add("p-3");
       col.classList.add("bg-body");
       col.classList.add("rounded");
-
       col.innerHTML = `<div class="card card-hight">
         <img
           src="${phone.image}"
@@ -64,8 +61,8 @@ const displayPhones = (phones) => {
           alt="..."
         />
         <div class="card-body">
-          <h4><b>Phone Name:</b> ${phone.phone_name}</h4>
-          <h5><b>Phone Brand:</b> ${phone.brand}</h5>
+          <h4><b>Device name:</b> ${phone.phone_name}</h4>
+          <h5><b>Brand:</b> ${phone.brand}</h5>
           <button
             class="btn custom-btn text-white"
             onclick="loadDetails('${phone.slug}')"
@@ -79,7 +76,6 @@ const displayPhones = (phones) => {
     });
   } else if (phones.length > 20) {
     const phoneSlice = phones.slice(0, 19);
-    console.log(phoneSlice);
     phoneSlice.forEach((phone) => {
       const col = document.createElement("div");
       col.classList.add("col-12");
@@ -89,7 +85,6 @@ const displayPhones = (phones) => {
       col.classList.add("p-3");
       col.classList.add("bg-body");
       col.classList.add("rounded");
-
       col.innerHTML = `<div class="card card-hight">
       <img
         src="${phone.image}"
@@ -97,8 +92,8 @@ const displayPhones = (phones) => {
         alt="..."
       />
       <div class="card-body">
-        <h4><b>Phone Name:</b> ${phone.phone_name}</h4>
-        <h5><b>Phone Brand:</b> ${phone.brand}</h5>
+        <h4><b>Device name:</b> ${phone.phone_name}</h4>
+        <h5><b>Brand:</b> ${phone.brand}</h5>
         <button
           class="btn custom-btn text-white"
           onclick="loadDetails('${phone.slug}')"
@@ -111,7 +106,7 @@ const displayPhones = (phones) => {
       spinner.classList.add("d-none");
     });
   }
-
+  // See more
   seeMoreBtn.addEventListener("click", () => {
     phones.forEach((phone) => {
       const col = document.createElement("div");
@@ -122,7 +117,6 @@ const displayPhones = (phones) => {
       col.classList.add("p-3");
       col.classList.add("bg-body");
       col.classList.add("rounded");
-
       col.innerHTML = `<div class="card card-hight">
         <img
           src="${phone.image}"
@@ -130,8 +124,8 @@ const displayPhones = (phones) => {
           alt="..."
         />
         <div class="card-body">
-          <h4><b>Phone Name:</b> ${phone.phone_name}</h4>
-          <h5><b>Phone Brand:</b> ${phone.brand}</h5>
+          <h4><b>Device name:</b> ${phone.phone_name}</h4>
+          <h5><b>Brand:</b> ${phone.brand}</h5>
           <button
             class="btn custom-btn text-white"
             onclick="loadDetails('${phone.slug}')"
@@ -145,7 +139,6 @@ const displayPhones = (phones) => {
     });
   });
 };
-
 // Load details data
 const loadDetails = (id) => {
   fetch(`https://openapi.programming-hero.com/api/phone/${id}`)
@@ -167,9 +160,9 @@ const displayDetails = (detailsInfo) => {
     alt="..."
   />
 </div>
-<div class="card-body card-overflow text-center">
-  <h4><b>Phone name:</b> ${detailsInfo.name}</h4>
-  <h5><b>Phone brand:</b> ${detailsInfo.brand}</h5>
+<div class="card-body modal-overflow text-center">
+  <h4><b>Device name:</b> ${detailsInfo.name}</h4>
+  <h5><b>Brand:</b> ${detailsInfo.brand}</h5>
   <h5><b>Release date:</b> <span id= "release-date"></span></h5>
   <h5><b>Storage:</b> ${detailsInfo.mainFeatures.storage}</h5>
   <h5><b>Display size:</b> ${detailsInfo.mainFeatures.displaySize}</h5>
@@ -177,7 +170,6 @@ const displayDetails = (detailsInfo) => {
   <h5><b>Others:</b></h5>
   <div id="others"></div>
 </div>`;
-
   // Release date error handling
   const releaseDateTxt = document.getElementById("release-date");
   if (detailsInfo.releaseDate === "") {
@@ -185,7 +177,6 @@ const displayDetails = (detailsInfo) => {
   } else {
     releaseDateTxt.innerText = `${detailsInfo.releaseDate}`;
   }
-
   // Others information error handling
   const others = document.getElementById("others");
   if (detailsInfo.others === undefined) {
@@ -193,18 +184,15 @@ const displayDetails = (detailsInfo) => {
   } else {
     others.innerHTML = `<h6><b>WLAN:</b> ${detailsInfo.others.WLAN}</h6>  
     <h6><b>Bluetooth:</b> ${detailsInfo.others.Bluetooth}</h6>  
-    <h6><b>GPS:</b> ${detailsInfo.others.GPS}</h6>  
+    <h6><b>GPS:</b> ${detailsInfo.others.GPS}</h6>
+    <h6><b>NFC:</b> ${detailsInfo.others.NFC}</h6>
     <h6><b>Radio:</b> ${detailsInfo.others.Radio}</h6>
-    <h6><b>USB:</b> ${detailsInfo.others.USB}</h6><h6><b>WLAN:</b> ${detailsInfo.others.WLAN}</h6>  
-    <h6><b>Bluetooth:</b> ${detailsInfo.others.Bluetooth}</h6>  
-    <h6><b>GPS:</b> ${detailsInfo.others.GPS}</h6>  
-    <h6><b>Radio:</b> ${detailsInfo.others.Radio}</h6>
-    <h6><b>USB:</b> ${detailsInfo.others.USB}</h6>`;
+    <h6><b>USB:</b> ${detailsInfo.others.USB}</h6>
+    `;
   }
   modal.classList.remove("d-none");
   details.classList.remove("d-none");
 };
-
 // Modal close
 const modalClose = () => {
   modal.classList.add("d-none");

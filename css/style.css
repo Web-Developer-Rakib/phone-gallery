@@ -15,7 +15,7 @@
 /* Modal send forward with custom style */
 .send-forward {
   z-index: 100;
-  margin-top: -150px;
+  margin-top: -180px;
   box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset,
     rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset,
     rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px,
@@ -24,11 +24,11 @@
   width: 75%;
 }
 /* Card overflow scroll */
-.card-overflow {
+.modal-overflow {
   height: 200px;
   overflow-y: scroll;
 }
 /* Scrollbar hidden */
-.card-overflow::-webkit-scrollbar {
+.modal-overflow::-webkit-scrollbar {
   display: none;
 }
