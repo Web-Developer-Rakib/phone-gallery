@@ -6,6 +6,8 @@ const notFoundTxt = document.getElementById("not-found");
 const phoneRow = document.getElementById("phone-row");
 const details = document.getElementById("details");
 const modal = document.getElementById("modal");
+const seeMoreDiv = document.getElementById("see-more-div");
+const seeMoreBtn = document.getElementById("see-more");
 
 // Alert messages
 const alerts = (errMsg) => {
@@ -15,6 +17,7 @@ const alerts = (errMsg) => {
   errorTxt.innerText = errMsg;
   phoneRow.innerHTML = "";
   notFoundTxt.classList.remove("d-none");
+  seeMoreDiv.classList.add("d-none");
 };
 // Load phone data
 const loadData = () => {
@@ -38,8 +41,40 @@ const loadData = () => {
 const displayPhones = (phones) => {
   if (phones.length === 0) {
     notFoundTxt.classList.remove("d-none");
-  } else {
+  } else if (phones.length < 20) {
     phones.forEach((phone) => {
+      const col = document.createElement("div");
+      col.classList.add("col-12");
+      col.classList.add("col-lg-4");
+      col.classList.add("g-4");
+      col.classList.add("shadow-lg");
+      col.classList.add("p-3");
+      col.classList.add("bg-body");
+      col.classList.add("rounded");
+
+      col.innerHTML = `<div class="card card-hight">
+        <img
+          src="${phone.image}"
+          class="card-img-top"
+          alt="..."
+        />
+        <div class="card-body">
+          <h4><b>Phone Name:</b> ${phone.phone_name}</h4>
+          <h5><b>Phone Brand:</b> ${phone.brand}</h5>
+          <button
+            class="btn custom-btn text-white"
+            onclick="loadDetails('${phone.slug}')"
+            >See details</button>
+        </div>
+      </div>`;
+      phoneRow.appendChild(col);
+      notFoundTxt.classList.add("d-none");
+      seeMoreDiv.classList.add("d-none");
+    });
+  } else if (phones.length > 20) {
+    const phoneSlice = phones.slice(0, 19);
+    console.log(phoneSlice);
+    phoneSlice.forEach((phone) => {
       const col = document.createElement("div");
       col.classList.add("col-12");
       col.classList.add("col-lg-4");
@@ -66,8 +101,41 @@ const displayPhones = (phones) => {
     </div>`;
       phoneRow.appendChild(col);
       notFoundTxt.classList.add("d-none");
+      seeMoreDiv.classList.remove("d-none");
     });
   }
+
+  seeMoreBtn.addEventListener("click", () => {
+    phones.forEach((phone) => {
+      const col = document.createElement("div");
+      col.classList.add("col-12");
+      col.classList.add("col-lg-4");
+      col.classList.add("g-4");
+      col.classList.add("shadow-lg");
+      col.classList.add("p-3");
+      col.classList.add("bg-body");
+      col.classList.add("rounded");
+
+      col.innerHTML = `<div class="card card-hight">
+        <img
+          src="${phone.image}"
+          class="card-img-top"
+          alt="..."
+        />
+        <div class="card-body">
+          <h4><b>Phone Name:</b> ${phone.phone_name}</h4>
+          <h5><b>Phone Brand:</b> ${phone.brand}</h5>
+          <button
+            class="btn custom-btn text-white"
+            onclick="loadDetails('${phone.slug}')"
+            >See details</button>
+        </div>
+      </div>`;
+      phoneRow.appendChild(col);
+      notFoundTxt.classList.add("d-none");
+      seeMoreDiv.classList.add("d-none");
+    });
+  });
 };
 
 // Load details data
