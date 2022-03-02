@@ -96,9 +96,16 @@ const displayDetails = (detailsInfo) => {
   <h5><b>Phone brand:</b> ${detailsInfo.brand}</h5>
   <h5><b>Storage:</b> ${detailsInfo.mainFeatures.storage}</h5>
   <h5><b>Display size:</b> ${detailsInfo.mainFeatures.displaySize}</h5>
-  <h5><b>Releash date:</b> ${detailsInfo.releaseDate}</h5>
-  <h5><b>Sensors:</b> ${detailsInfo.mainFeatures.sensors} </h5>
+  <h5><b>Release date:</b> <span id= "release-date"></span></h5>
 </div>`;
+
+  // Release date error handling
+  const releaseDateTxt = document.getElementById("release-date");
+  if (detailsInfo.releaseDate === "") {
+    releaseDateTxt.innerText = "Not found";
+  } else {
+    releaseDateTxt.innerText = `${detailsInfo.releaseDate}`;
+  }
   modal.classList.remove("d-none");
   details.classList.remove("d-none");
 };
