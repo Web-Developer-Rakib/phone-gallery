@@ -54,6 +54,15 @@
           Search
         </button>
       </div>
+      <!-- Loading spinner -->
+      <div class="d-none" id="spinner">
+        <div class="d-flex justify-content-center">
+          <div class="spinner-border text-primary" role="status"></div>
+          <div class="spinner-border text-danger" role="status"></div>
+          <div class="spinner-border text-warning" role="status"></div>
+        </div>
+        <h3 class="text-center">Loading...</h3>
+      </div>
       <!-- Error message -->
       <h3 class="text-center text-danger d-none" id="not-found">
         No results found!
@@ -65,8 +74,8 @@
       <!-- Phone grid section -->
       <div class="row" id="phone-row"></div>
       <!-- See more button -->
-      <div class="d-flex justify-content-center d-none" id="see-more-div">
-        <button class="btn custom-btn text-white" id="see-more">
+      <div class="d-flex justify-content-center d-none my-5" id="see-more-div">
+        <button class="btn custom-btn text-white btn-lg" id="see-more">
           See more
         </button>
       </div>

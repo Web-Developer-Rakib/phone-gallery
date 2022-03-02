@@ -8,6 +8,7 @@ const details = document.getElementById("details");
 const modal = document.getElementById("modal");
 const seeMoreDiv = document.getElementById("see-more-div");
 const seeMoreBtn = document.getElementById("see-more");
+const spinner = document.getElementById("spinner");
 
 // Alert messages
 const alerts = (errMsg) => {
@@ -33,6 +34,8 @@ const loadData = () => {
     )
       .then((res) => res.json())
       .then((data) => displayPhones(data.data));
+    spinner.classList.remove("d-none");
+    seeMoreDiv.classList.add("d-none");
     phoneRow.innerHTML = "";
   }
 };
@@ -41,6 +44,8 @@ const loadData = () => {
 const displayPhones = (phones) => {
   if (phones.length === 0) {
     notFoundTxt.classList.remove("d-none");
+    spinner.classList.add("d-none");
+    seeMoreDiv.classList.add("d-none");
   } else if (phones.length < 20) {
     phones.forEach((phone) => {
       const col = document.createElement("div");
@@ -70,6 +75,7 @@ const displayPhones = (phones) => {
       phoneRow.appendChild(col);
       notFoundTxt.classList.add("d-none");
       seeMoreDiv.classList.add("d-none");
+      spinner.classList.add("d-none");
     });
   } else if (phones.length > 20) {
     const phoneSlice = phones.slice(0, 19);
@@ -102,6 +108,7 @@ const displayPhones = (phones) => {
       phoneRow.appendChild(col);
       notFoundTxt.classList.add("d-none");
       seeMoreDiv.classList.remove("d-none");
+      spinner.classList.add("d-none");
     });
   }
 
@@ -134,6 +141,7 @@ const displayPhones = (phones) => {
       phoneRow.appendChild(col);
       notFoundTxt.classList.add("d-none");
       seeMoreDiv.classList.add("d-none");
+      spinner.classList.add("d-none");
     });
   });
 };

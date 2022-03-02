@@ -12,6 +12,7 @@
 .heading-color {
   color: crimson;
 }
+/* Modal send forward with custom style */
 .send-forward {
   z-index: 100;
   margin-top: -150px;
@@ -22,10 +23,12 @@
     rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
   width: 75%;
 }
+/* Card overflow scroll */
 .card-overflow {
   height: 200px;
   overflow-y: scroll;
 }
+/* Scrollbar hidden */
 .card-overflow::-webkit-scrollbar {
   display: none;
 }
