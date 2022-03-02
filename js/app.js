@@ -91,12 +91,15 @@ const displayDetails = (detailsInfo) => {
     alt="..."
   />
 </div>
-<div class="card-body text-center">
+<div class="card-body card-overflow text-center">
   <h4><b>Phone name:</b> ${detailsInfo.name}</h4>
   <h5><b>Phone brand:</b> ${detailsInfo.brand}</h5>
+  <h5><b>Release date:</b> <span id= "release-date"></span></h5>
   <h5><b>Storage:</b> ${detailsInfo.mainFeatures.storage}</h5>
   <h5><b>Display size:</b> ${detailsInfo.mainFeatures.displaySize}</h5>
-  <h5><b>Release date:</b> <span id= "release-date"></span></h5>
+  <h5><b>Sensors:</b> ${detailsInfo.mainFeatures.sensors}</h5>
+  <h5><b>Others:</b></h5>
+  <div id="others"></div>
 </div>`;
 
   // Release date error handling
@@ -106,9 +109,26 @@ const displayDetails = (detailsInfo) => {
   } else {
     releaseDateTxt.innerText = `${detailsInfo.releaseDate}`;
   }
+
+  // Others information error handling
+  const others = document.getElementById("others");
+  if (detailsInfo.others === undefined) {
+    others.innerHTML = `<h5>Info not available.</h5>`;
+  } else {
+    others.innerHTML = `<h6><b>WLAN:</b> ${detailsInfo.others.WLAN}</h6>  
+    <h6><b>Bluetooth:</b> ${detailsInfo.others.Bluetooth}</h6>  
+    <h6><b>GPS:</b> ${detailsInfo.others.GPS}</h6>  
+    <h6><b>Radio:</b> ${detailsInfo.others.Radio}</h6>
+    <h6><b>USB:</b> ${detailsInfo.others.USB}</h6><h6><b>WLAN:</b> ${detailsInfo.others.WLAN}</h6>  
+    <h6><b>Bluetooth:</b> ${detailsInfo.others.Bluetooth}</h6>  
+    <h6><b>GPS:</b> ${detailsInfo.others.GPS}</h6>  
+    <h6><b>Radio:</b> ${detailsInfo.others.Radio}</h6>
+    <h6><b>USB:</b> ${detailsInfo.others.USB}</h6>`;
+  }
   modal.classList.remove("d-none");
   details.classList.remove("d-none");
 };
+
 // Modal close
 const modalClose = () => {
   modal.classList.add("d-none");
